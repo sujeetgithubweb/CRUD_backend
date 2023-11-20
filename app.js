@@ -1,3 +1,4 @@
+var debug = require('debug')('CRUD_server')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -38,4 +39,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.set('port', process.env.PORT || 3000)
+
+var server = app.listen(app.get('port'), () => {
+  debug('Express server listening on port ' + server.address().port)
+})
